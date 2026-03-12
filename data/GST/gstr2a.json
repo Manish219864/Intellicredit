@@ -1,0 +1,10 @@
+{
+  "gstin": "27ABCDE1234F1Z5",
+  "tax_period": "Jan-2024",
+  "supplier_reported_invoices": {
+    "taxable_value": 2950000,
+    "input_tax_credit_available": 390000
+  },
+  "invoice_count": 48,
+  "mismatched_invoices": 5
+}

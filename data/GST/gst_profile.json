@@ -1,0 +1,10 @@
+{
+  "gstin": "27ABCDE1234F1Z5",
+  "registration_date": "2019-04-01",
+  "filing_status": {
+    "last_6_months_filed_on_time": 4,
+    "delayed_filings": 2
+  },
+  "notices_received_last_year": 1,
+  "risk_flag": "Medium"
+}

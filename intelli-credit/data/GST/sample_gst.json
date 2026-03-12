@@ -1,0 +1,19 @@
+{
+    "gstr3b": {
+        "period": "2023-24",
+        "gstin": "27AABCU9603R1ZX",
+        "company_name": "Sunrise Manufacturing Pvt Ltd",
+        "taxable_turnover": 4850000,
+        "igst_paid": 485000,
+        "cgst_paid": 242500,
+        "sgst_paid": 242500,
+        "total_tax_paid": 970000
+    },
+    "gstr2a": {
+        "period": "2023-24",
+        "gstin": "27AABCU9603R1ZX",
+        "company_name": "Sunrise Manufacturing Pvt Ltd",
+        "inward_supplies_turnover": 4200000,
+        "itc_claimed": 420000
+    }
+}

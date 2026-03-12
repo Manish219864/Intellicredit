@@ -1,0 +1,25 @@
+{
+    "company": "Sunrise Manufacturing Pvt Ltd",
+    "gstin": "27AABCU9603R1ZX",
+    "pan": "AABCU9603R",
+    "financial_year": "2023-24",
+    "financials": {
+        "total_revenue": 52000000,
+        "net_profit": 4100000,
+        "ebitda": 6500000,
+        "total_loans": 18000000,
+        "current_ratio": 1.45,
+        "debt_equity_ratio": 2.1,
+        "interest_coverage": 3.2
+    },
+    "loan_request": {
+        "amount": 10000000,
+        "purpose": "Working Capital",
+        "tenure_months": 36,
+        "collateral": "Factory Land & Building"
+    },
+    "promoters": [
+        {"name": "Rahul Sharma", "din": "00123456", "share": 60},
+        {"name": "Priya Sharma", "din": "00654321", "share": 40}
+    ]
+}
