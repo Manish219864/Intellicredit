@@ -152,15 +152,23 @@ with st.sidebar:
     st.divider()
 
     # API key status indicators
-    openai_set = bool(os.getenv("OPENAI_API_KEY", "")) and os.getenv("OPENAI_API_KEY") != "your_openai_api_key_here"
-    serp_set   = bool(os.getenv("SERPAPI_KEY", "")) and os.getenv("SERPAPI_KEY") != "your_serpapi_key_here"
+    st.markdown("**API Configuration**")
+    openai_key_input = st.text_input("OpenAI API Key", type="password", value=os.getenv("OPENAI_API_KEY", ""))
+    serpapi_key_input = st.text_input("SerpAPI Key", type="password", value=os.getenv("SERPAPI_KEY", ""))
+    
+    if openai_key_input:
+        os.environ["OPENAI_API_KEY"] = openai_key_input
+    if serpapi_key_input:
+        os.environ["SERPAPI_KEY"] = serpapi_key_input
 
-    st.markdown("**API Status**")
+    openai_set = bool(os.environ.get("OPENAI_API_KEY", "")) and os.environ.get("OPENAI_API_KEY") != "your_openai_api_key_here"
+    serp_set   = bool(os.environ.get("SERPAPI_KEY", "")) and os.environ.get("SERPAPI_KEY") != "your_serpapi_key_here"
+
     st.markdown(f"{'🟢' if openai_set else '🔴'} OpenAI GPT")
     st.markdown(f"{'🟢' if serp_set else '🟡'} SerpAPI News")
 
     if not openai_set:
-        st.warning("Add OPENAI_API_KEY to .env for LLM features.")
+        st.warning("Add OpenAI key above for LLM features.")
 
     st.divider()
     st.markdown("<small style='color:#64748b'>Phase 1–5 Complete ✅</small>", unsafe_allow_html=True)
