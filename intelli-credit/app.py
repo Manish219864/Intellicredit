@@ -17,6 +17,8 @@ import os
 import streamlit as st
 from dotenv import load_dotenv
 
+from utils.helpers import format_currency
+
 # Load .env
 load_dotenv()
 
