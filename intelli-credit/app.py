@@ -193,9 +193,16 @@ if page == "📤 Upload & Extract":
 
     if use_demo:
         from agents.extraction_agent import load_sample_data
-        st.session_state.financials = load_sample_data("data/annual_reports/sample_borrower.json")
-        st.session_state.financials["company_name"] = company_name
-        st.success("✅ Demo data loaded successfully!")
+        import os
+        # Try finding the data folder whether we're in the root repo or intelli-credit folder
+        demo_path = "intelli-credit/data/annual_reports/sample_borrower.json" if os.path.exists("intelli-credit/data/annual_reports/sample_borrower.json") else "data/annual_reports/sample_borrower.json"
+        
+        try:
+            st.session_state.financials = load_sample_data(demo_path)
+            st.session_state.financials["company_name"] = company_name
+            st.success("✅ Demo data loaded successfully!")
+        except Exception as e:
+            st.error(f"❌ Failed to load demo data: {str(e)}")
 
     if uploaded:
         with st.spinner("Extracting text from PDF..."):
