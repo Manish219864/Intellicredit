@@ -214,15 +214,19 @@ if page == "📤 Upload & Extract":
         st.info(f"📄 Extracted {len(result['text'])} characters via **{result['method']}** from {result['pages']} pages.")
 
         if st.button("🤖 Extract Financial Fields with AI"):
-            if not os.getenv("OPENAI_API_KEY"):
-                st.error("OpenAI API key required. Add it to .env")
+            if not os.environ.get("OPENAI_API_KEY"):
+                st.error("OpenAI API key required. Add it in the sidebar.")
             else:
                 with st.spinner("Running extraction agent..."):
                     from agents.extraction_agent import ExtractionAgent
                     agent = ExtractionAgent()
-                    st.session_state.financials = agent.extract_all(st.session_state.pdf_text)
-                    st.session_state.financials["company_name"] = company_name
-                st.success("✅ Extraction complete!")
+                    try:
+                        st.session_state.financials = agent.extract_all(st.session_state.pdf_text)
+                        st.session_state.financials["company_name"] = company_name
+                        st.success("✅ Extraction complete!")
+                    except Exception as e:
+                        st.error(f"❌ OpenAI API Error: {str(e)}")
+                        st.info("Check if your OpenAI API key has sufficient billing quota at platform.openai.com/account/billing")
 
     # Display extracted data
     if st.session_state.financials:

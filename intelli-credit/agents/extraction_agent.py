@@ -95,12 +95,8 @@ class ExtractionAgent:
         """Run a prompt | llm | parser chain and return raw string output."""
         prompt = PromptTemplate(input_variables=["text"], template=template)
         chain = prompt | self.llm | StrOutputParser()
-        try:
-            result = chain.invoke({"text": text[:4000]})  # stay within token limits
-            return result
-        except Exception as e:
-            logger.error("LLM chain failed: %s", e)
-            return "{}"
+        result = chain.invoke({"text": text[:4000]})  # stay within token limits
+        return result
 
     def extract_financials(self, text: str) -> dict:
         """
