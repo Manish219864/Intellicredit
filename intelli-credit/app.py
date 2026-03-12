@@ -256,7 +256,7 @@ if page == "📤 Upload & Extract":
         if fin.get("promoters"):
             st.subheader("👥 Promoters / Directors")
             import pandas as pd
-            st.dataframe(pd.DataFrame(fin["promoters"]), use_container_width=True)
+            st.dataframe(pd.DataFrame(fin["promoters"]), width="stretch")
 
         # Risk factors from text
         if fin.get("risk_factors"):
@@ -599,7 +599,7 @@ elif page == "📊 Score & Insights":
             st.subheader("📉 Score Waterfall Chart")
             from agents.scoring_agent import build_waterfall_chart
             fig = build_waterfall_chart(res)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
             # ── LLM Explanation ──
             st.subheader("💬 AI Score Explanation")
@@ -713,7 +713,7 @@ elif page == "📄 Generate CAM":
 
             import pandas as pd
             df = pd.DataFrame(list(preview_data.items()), columns=["Field", "Value"])
-            st.dataframe(df, use_container_width=True, hide_index=True)
+            st.dataframe(df, width="stretch", hide_index=True)
 
             with st.expander("📝 Recommendation Text"):
                 st.write(recommendation)
