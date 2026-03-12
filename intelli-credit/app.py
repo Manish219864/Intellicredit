@@ -152,23 +152,15 @@ with st.sidebar:
     st.divider()
 
     # API key status indicators
-    st.markdown("**API Configuration**")
-    groq_key_input = st.text_input("Groq API Key (Llama 3)", type="password", value=os.getenv("GROQ_API_KEY", ""))
-    serpapi_key_input = st.text_input("SerpAPI Key", type="password", value=os.getenv("SERPAPI_KEY", ""))
-    
-    if groq_key_input:
-        os.environ["GROQ_API_KEY"] = groq_key_input
-    if serpapi_key_input:
-        os.environ["SERPAPI_KEY"] = serpapi_key_input
-
     groq_set = bool(os.environ.get("GROQ_API_KEY", "")) and os.environ.get("GROQ_API_KEY") != "your_groq_api_key_here"
     serp_set   = bool(os.environ.get("SERPAPI_KEY", "")) and os.environ.get("SERPAPI_KEY") != "your_serpapi_key_here"
 
+    st.markdown("**API Status**")
     st.markdown(f"{'🟢' if groq_set else '🔴'} Groq (Llama 3)")
     st.markdown(f"{'🟢' if serp_set else '🟡'} SerpAPI News")
 
     if not groq_set:
-        st.warning("Add Groq API key above for LLM features (It's free!).")
+        st.warning("Please add GROQ_API_KEY to your Streamlit secrets.")
 
     st.divider()
     st.markdown("<small style='color:#64748b'>Phase 1–5 Complete ✅</small>", unsafe_allow_html=True)
@@ -215,7 +207,7 @@ if page == "📤 Upload & Extract":
 
         if st.button("🤖 Extract Financial Fields with AI (Groq Llama3)"):
             if not os.environ.get("GROQ_API_KEY"):
-                st.error("Groq API key required. Add it in the sidebar.")
+                st.error("Groq API key required. Add it to Streamlit Secrets.")
             else:
                 with st.spinner("Running extraction agent..."):
                     from agents.extraction_agent import ExtractionAgent
