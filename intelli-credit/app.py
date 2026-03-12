@@ -153,22 +153,22 @@ with st.sidebar:
 
     # API key status indicators
     st.markdown("**API Configuration**")
-    openai_key_input = st.text_input("OpenAI API Key", type="password", value=os.getenv("OPENAI_API_KEY", ""))
+    groq_key_input = st.text_input("Groq API Key (Llama 3)", type="password", value=os.getenv("GROQ_API_KEY", ""))
     serpapi_key_input = st.text_input("SerpAPI Key", type="password", value=os.getenv("SERPAPI_KEY", ""))
     
-    if openai_key_input:
-        os.environ["OPENAI_API_KEY"] = openai_key_input
+    if groq_key_input:
+        os.environ["GROQ_API_KEY"] = groq_key_input
     if serpapi_key_input:
         os.environ["SERPAPI_KEY"] = serpapi_key_input
 
-    openai_set = bool(os.environ.get("OPENAI_API_KEY", "")) and os.environ.get("OPENAI_API_KEY") != "your_openai_api_key_here"
+    groq_set = bool(os.environ.get("GROQ_API_KEY", "")) and os.environ.get("GROQ_API_KEY") != "your_groq_api_key_here"
     serp_set   = bool(os.environ.get("SERPAPI_KEY", "")) and os.environ.get("SERPAPI_KEY") != "your_serpapi_key_here"
 
-    st.markdown(f"{'🟢' if openai_set else '🔴'} OpenAI GPT")
+    st.markdown(f"{'🟢' if groq_set else '🔴'} Groq (Llama 3)")
     st.markdown(f"{'🟢' if serp_set else '🟡'} SerpAPI News")
 
-    if not openai_set:
-        st.warning("Add OpenAI key above for LLM features.")
+    if not groq_set:
+        st.warning("Add Groq API key above for LLM features (It's free!).")
 
     st.divider()
     st.markdown("<small style='color:#64748b'>Phase 1–5 Complete ✅</small>", unsafe_allow_html=True)
@@ -213,9 +213,9 @@ if page == "📤 Upload & Extract":
 
         st.info(f"📄 Extracted {len(result['text'])} characters via **{result['method']}** from {result['pages']} pages.")
 
-        if st.button("🤖 Extract Financial Fields with AI"):
-            if not os.environ.get("OPENAI_API_KEY"):
-                st.error("OpenAI API key required. Add it in the sidebar.")
+        if st.button("🤖 Extract Financial Fields with AI (Groq Llama3)"):
+            if not os.environ.get("GROQ_API_KEY"):
+                st.error("Groq API key required. Add it in the sidebar.")
             else:
                 with st.spinner("Running extraction agent..."):
                     from agents.extraction_agent import ExtractionAgent
@@ -225,8 +225,8 @@ if page == "📤 Upload & Extract":
                         st.session_state.financials["company_name"] = company_name
                         st.success("✅ Extraction complete!")
                     except Exception as e:
-                        st.error(f"❌ OpenAI API Error: {str(e)}")
-                        st.info("Check if your OpenAI API key has sufficient billing quota at platform.openai.com/account/billing")
+                        st.error(f"❌ Groq API Error: {str(e)}")
+                        st.info("Ensure your Groq API key is valid at console.groq.com")
 
     # Display extracted data
     if st.session_state.financials:
@@ -453,7 +453,7 @@ elif page == "🌐 Web Research":
             news = search_news(company, sector)
             st.session_state.news = news
 
-        if news and os.getenv("OPENAI_API_KEY"):
+        if news and os.getenv("GROQ_API_KEY"):
             with st.spinner("Analysing sentiment with AI..."):
                 from agents.web_research_agent import WebResearchAgent
                 agent = WebResearchAgent()
@@ -465,7 +465,7 @@ elif page == "🌐 Web Research":
                 "sentiment_score": 0.0,
                 "key_positives": ["See headlines below"],
                 "key_risks": ["LLM unavailable – manual review required"],
-                "summary": "Add OpenAI API key for AI sentiment analysis.",
+                "summary": "Add Groq API key for AI sentiment analysis.",
             }
 
     # Display results

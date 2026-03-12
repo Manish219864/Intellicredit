@@ -9,7 +9,7 @@ Task 3: Feeds top 5 headlines to LLM for sentiment analysis and risk extraction.
 import logging
 from typing import Optional
 
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -139,9 +139,9 @@ class WebResearchAgent:
     Phase 3: Searches news and performs LLM-based sentiment analysis.
     """
 
-    def __init__(self, model: str = "gpt-3.5-turbo"):
-        api_key = get_env("OPENAI_API_KEY")
-        self.llm = ChatOpenAI(model=model, temperature=0, api_key=api_key)
+    def __init__(self, model: str = "llama3-70b-8192"):
+        api_key = get_env("GROQ_API_KEY")
+        self.llm = ChatGroq(model=model, temperature=0, api_key=api_key)
 
     def analyse_sentiment(self, news_items: list[dict]) -> dict:
         """

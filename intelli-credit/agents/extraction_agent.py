@@ -9,7 +9,7 @@ from raw text and returns them as a structured Python dictionary.
 import logging
 from typing import Optional
 
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -83,9 +83,9 @@ class ExtractionAgent:
     Use extract_all() for a complete extraction run.
     """
 
-    def __init__(self, model: str = "gpt-3.5-turbo", temperature: float = 0):
-        api_key = get_env("OPENAI_API_KEY")
-        self.llm = ChatOpenAI(
+    def __init__(self, model: str = "llama3-70b-8192", temperature: float = 0):
+        api_key = get_env("GROQ_API_KEY")
+        self.llm = ChatGroq(
             model=model,
             temperature=temperature,
             api_key=api_key,
