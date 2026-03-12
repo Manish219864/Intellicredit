@@ -83,7 +83,7 @@ class ExtractionAgent:
     Use extract_all() for a complete extraction run.
     """
 
-    def __init__(self, model: str = "llama3-70b-8192", temperature: float = 0):
+    def __init__(self, model: str = "llama-3.3-70b-versatile", temperature: float = 0):
         api_key = get_env("GROQ_API_KEY")
         self.llm = ChatGroq(
             model=model,

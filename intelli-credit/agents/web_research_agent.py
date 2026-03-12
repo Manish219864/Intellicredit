@@ -139,7 +139,7 @@ class WebResearchAgent:
     Phase 3: Searches news and performs LLM-based sentiment analysis.
     """
 
-    def __init__(self, model: str = "llama3-70b-8192"):
+    def __init__(self, model: str = "llama-3.3-70b-versatile"):
         api_key = get_env("GROQ_API_KEY")
         self.llm = ChatGroq(model=model, temperature=0, api_key=api_key)
 
